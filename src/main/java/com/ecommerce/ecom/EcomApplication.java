@@ -11,8 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ecommerce.ecom.models.Car;
 import com.ecommerce.ecom.models.Owner;
+import com.ecommerce.ecom.models.User;
 import com.ecommerce.ecom.repository.CarRepository;
 import com.ecommerce.ecom.repository.OwnerRepository;
+import com.ecommerce.ecom.repository.UserRepository;
 
 @SpringBootApplication
 public class EcomApplication implements CommandLineRunner {
@@ -26,6 +28,9 @@ public class EcomApplication implements CommandLineRunner {
 	@Autowired
 	private OwnerRepository orepository;
 
+	@Autowired
+	private UserRepository urepository;
+	
 	//this is main method 
 	public static void main(String[] args) {
 		SpringApplication.run(EcomApplication.class, args);
@@ -52,7 +57,14 @@ public class EcomApplication implements CommandLineRunner {
 		Car car5 = new Car("Ford5", "Mustang5", "Red5", "ADF-11214", 2025, 59000, owner2);
 		Car car6 = new Car("Ford6", "Mustang6", "Red6", "ADF-11215", 2026, 59000, owner2);
 		repository.saveAll(Arrays.asList(car1, car2, car3, car4, car5, car6));
+		
+		//add username and password objects and save into db
+		
+		
+		urepository.save(new User("deepak123","$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue","USER"));
+		urepository.save(new User("himanshukaun","$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW", "ADMIN"));
 
+				
 		// agar car ko terminal m print karwana ho to
 
 		for (Car car : repository.findAll()) {
